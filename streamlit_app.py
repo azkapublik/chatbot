@@ -44,11 +44,16 @@ else:
         response = requests.post(url, json=payload, headers=headers)
         if response.status_code == 200:
             data = response.json()
+            # Safely extract the 'output' field
+            if 'data' in data and 'output' in data['data']:
+                output = data['data']['output']
+            else:
+                output = "No 'output' field in the response."
         else:
             print(f"Error: {response.status_code} - {response.text}")
 
         # Stream the response to the chat using `st.write_stream`, then store it in 
         # session state.
         with st.chat_message("assistant"):
-            response = st.write_stream(data['data']['output'])
+            response = st.write_stream(output)
         st.session_state.messages.append({"role": "assistant", "content": response})

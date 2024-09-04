@@ -5,12 +5,9 @@ from openai import OpenAI
 st.title("💬 Chatbot")
 st.write("How I can help you?")
 
-# Ask user for their OpenAI API key via `st.text_input`.
-# Alternatively, you can store the API key in `./.streamlit/secrets.toml` and access it
-# via `st.secrets`, see https://docs.streamlit.io/develop/concepts/connections/secrets-management
-openai_api_key = st.text_input("OpenAI API Key", type="password")
-if not openai_api_key:
-    st.info("Please add your OpenAI API key to continue.", icon="🗝️")
+token = st.secrets["TOKEN"]
+if not token:
+    st.info("Please add your TOKEN key to continue.", icon="🗝️")
 else:
 
     # Create an OpenAI client.

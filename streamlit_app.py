@@ -7,7 +7,7 @@ st.write("How I can help you?")
 
 token = st.secrets["TOKEN"]
 if not token:
-    st.info("Please add your TOKEN key to continue.", icon="🗝️")
+    st.info("Please add your TOKEN API key to continue.", icon="🗝️")
 else:
 
     # Create an OpenAI client.

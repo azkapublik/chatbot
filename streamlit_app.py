@@ -1,17 +1,22 @@
 import streamlit as st
-from openai import OpenAI
+import requests
 
 # Show title and description.
 st.title("💬 Chatbot")
 st.write("How I can help you?")
 
 token = st.secrets["TOKEN"]
+url = st.secrets["URL"]
+
 if not token:
     st.info("Please add your TOKEN API key to continue.", icon="🗝️")
 else:
+    headers = {
+        'Authorization': 'Bearer '+token,
+        'Content-Type': 'application/json'
+    }
 
-    # Create an OpenAI client.
-    client = OpenAI(api_key=openai_api_key)
+    client = 
 
     # Create a session state variable to store the chat messages. This ensures that the
     # messages persist across reruns.
@@ -32,15 +37,12 @@ else:
         with st.chat_message("user"):
             st.markdown(prompt)
 
+        payload = {
+            "username": "user",
+            "message": prompt
+        }
         # Generate a response using the OpenAI API.
-        stream = client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": m["role"], "content": m["content"]}
-                for m in st.session_state.messages
-            ],
-            stream=True,
-        )
+        stream = requests.post(url, json=payload, headers=headers)
 
         # Stream the response to the chat using `st.write_stream`, then store it in 
         # session state.

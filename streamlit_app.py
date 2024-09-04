@@ -46,9 +46,9 @@ else:
             if 'data' in data and 'output' in data['data']:
                 output = data['data']['output']
             else:
-                output = "No 'output' field in the response."
+                output = "Maaf bisa diulang kembali."
         else:
-            print(f"Error: {response.status_code} - {response.text}")
+            output = "Maaf bisa diulang kembali."
 
         # Stream the response to the chat using `st.write_stream`, then store it in 
         # session state.

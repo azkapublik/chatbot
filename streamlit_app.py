@@ -40,11 +40,9 @@ else:
             "message": prompt
         }
         # Generate a response using the OpenAI API.
-        data = ''
         response = requests.post(url, json=payload, headers=headers)
         if response.status_code == 200:
             data = response.json()
-            # Safely extract the 'output' field
             if 'data' in data and 'output' in data['data']:
                 output = data['data']['output']
             else:
@@ -55,5 +53,5 @@ else:
         # Stream the response to the chat using `st.write_stream`, then store it in 
         # session state.
         with st.chat_message("assistant"):
-            response = st.write(output)
-        st.session_state.messages.append({"role": "assistant", "content": response})
+            responses = st.write(output)
+        st.session_state.messages.append({"role": "assistant", "content": responses})

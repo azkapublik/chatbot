@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 # Show title and description.
-st.title("💬 Chatbot")
+st.title("💬 ComplAI")
 st.write("How I can help you?")
 
 token = st.secrets["TOKEN"]
